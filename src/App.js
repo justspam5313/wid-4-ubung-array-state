@@ -7,7 +7,7 @@ function App() {
       <header>Übung WID 4 - Array State </header>
       <h2> Todo-Liste</h2>
       <div id="container">
-        {/* ---- Hinzufügen von Todos ----  */}
+        {/* ---- Hinzufügen von Todos ---- */}
         <div id="eingabeZeile">
           <input type="text" />
           <button className="Button">Todo hinzufügen</button>
