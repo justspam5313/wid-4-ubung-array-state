@@ -67,6 +67,16 @@ h2 {
   margin: 5px 10px 5px 5px;
 }
 
+.todoListe.hoch {
+  background-color: #f7aaaa;
+}
+.todoListe.mittel {
+  background-color: #f3e3a3;
+}
+.todoListe.niedrig {
+  background-color: #98e4b3;
+}
+
 li {
   font-size: 16px;
   margin-left: -15px;

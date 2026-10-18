@@ -1,10 +1,23 @@
 import "./app.css";
 import { useState } from "react";
 
+// Mögliche Erweiterungen:
+// Die ToDos werden aktuell als ein Array mit Strings in State gespeichert. Ändere den Array, das dieser Objekte enhält, welche die Eigenschaft «task» und ein ToDo (string) als Wert haben. Beispiel:   [«Lesen»]   wird zu  [{task: «Lesen»}]
+
+// Aktualisiere und teste den Code, dass er nun mit Objekten funktioniert. Das Eingabefeld und den zugehörigen Hook änderst du nicht (es speichert weiter den Eingabewert als string)
+
+// Füge zwischen Eingabefeld und «Hinzufügen» Button ein Auswahlmenü (select + option) hinzu. Dieses soll die drei Prioritäten «hoch», «mittel», «niedrig» definieren und in den Todo-Objekten speichern. (Auch hier brauchst du einen useState-Hook und value-Attrîbute.)
+
+// ToDos sollen je nach Priorität andere Hintergrundfarben haben.
+
 function App() {
   // State für alle Todos (Array) und für den Text im Eingabefeld
-  const [todoListe, setTodoListe] = useState(["Schlafen", "Essen"]);
+  const [todoListe, setTodoListe] = useState([
+    { task: "Schlafen", prioritaet: "hoch" },
+    { task: "Essen", prioritaet: "hoch" },
+  ]);
   const [aktuellesTodo, setAktuellesTodo] = useState("");
+  const [prio, setPrio] = useState("mittel");
 
   // Todo an der Position "index" löschen
   const removeTodo = (index) => {
@@ -31,9 +44,19 @@ function App() {
           />
           {/* neues Array erstellen: ...todoListe kopiert die alten Todos, aktuellesTodo kommt hinten dran
               Arrow-Function, damit das erst beim Klick passiert */}
+          <select value={prio} onChange={(e) => setPrio(e.target.value)}>
+            <option value="hoch">hoch</option>
+            <option value="mittel">mittel</option>
+            <option value="niedrig">niedrig</option>
+          </select>
           <button
             className="Button"
-            onClick={() => setTodoListe([...todoListe, aktuellesTodo])}
+            onClick={() =>
+              setTodoListe([
+                ...todoListe,
+                { task: aktuellesTodo, prioritaet: prio },
+              ])
+            }
           >
             Todo hinzufügen
           </button>
@@ -46,8 +69,8 @@ function App() {
               die <ol> nummeriert die <li> automatisch */}
           {todoListe.map((todo, index) => (
             <li key={index}>
-              <div className="todoListe">
-                <p>{todo}</p>
+              <div className={`todoListe ${todo.prioritaet}`}>
+                <p>{todo.task}</p>
                 {/* Arrow-Function, damit removeTodo erst beim Klick mit dem richtigen index aufgerufen wird
                     onClick={removeTodo(index)} würde es sofort beim Rendern ausführen */}
                 <button onClick={() => removeTodo(index)}>Todo löschen</button>
